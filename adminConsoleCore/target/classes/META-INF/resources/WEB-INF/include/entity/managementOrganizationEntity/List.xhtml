@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions">
+    <!--<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+    <h:outputScript library="js" name="data.js"></h:outputScript>
+    <h:outputScript library="js" name="selector.js"></h:outputScript>-->
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card ShadowEffect  ">
+                <div class="Container100">
+                    <div class="ContainerIndent">
+
+                        <!-- 外部菜单 -->
+
+                        <h:form id="ManagementOrganizationListForm">
+
+                            <!-- 导出菜单 -->
+                            <h2 class="CardTopic">
+                                <i class="icon-google132 Fs20 Fleft MarRight10 OvHidden"/>#{myBundle.ListManagementOrganizationTitle}
+                                <p:commandButton id="menuButton" type="button"
+                                                 icon="fa fa-ellipsis-v Gray Fs20"
+                                                 styleClass="Fright GrayButton"
+                                                 style="margin-top:-10px !important;"/>
+                                <p:menu overlay="true" trigger="menuButton"
+                                        my="left top" at="left bottom">
+
+                                    <p:menuitem value="导出Excel"
+                                                icon="ui-icon-disk fa fa-file-excel-o"
+                                                ajax="false">
+                                        <p:dataExporter type="xlsx"
+                                                        target="datalist"
+                                                        fileName="details"/>
+                                    </p:menuitem>
+                                    <p:menuitem value="批量打印"
+                                                icon="ui-icon-disk fa fa-file-pdf-o"
+                                                ajax="false">
+                                        <pe:exporter type="xlsx"
+                                                     target="datalist"
+                                                     fileName="details"
+                                                     facetBackground="#AAFFBB"
+                                                     datasetPadding="4"/>
+                                    </p:menuitem>
+                                </p:menu>
+                                <p:commandButton id="advancedSearch" type="button"
+                                                 icon="fa fa-filter Gray Fs20"
+                                                 styleClass="Fright GrayButton"
+                                                 style="margin-top:-10px !important;"
+                                                 onclick="PF('dynaFormGroup').toggle();"/>
+                                <p:commandButton id="createButton1"
+                                                 icon="ui-icon-plus Gray Fs20"
+                                                 styleClass="Fright GrayButton"
+                                                 style="margin-top:-10px !important;"
+                                                 actionListener="#{managementOrganizationController.prepareCreate}"
+                                                 update=":ManagementOrganizationCreateForm"
+                                                 oncomplete="PF('ManagementOrganizationCreateDialog').show()"/>
+                            </h2>
+
+                            <!--TODO: 使用导航  -->
+                            <p:contextMenu id="ManagementOrganizationDataTableContextMenu" for="datalist">
+                                <p:menuitem value="#{myBundle.Create}"
+                                            onclick="document.getElementById('ManagementOrganizationListForm:createButton').click();"
+                                            icon="ui-icon-plus"/>
+                                <p:menuitem value="#{myBundle.View}"
+                                            onclick="document.getElementById('ManagementOrganizationListForm:viewButton').click();"
+                                            icon="ui-icon-search"/>
+                                <p:menuitem value="#{myBundle.Edit}"
+                                            onclick="document.getElementById('ManagementOrganizationListForm:editButton').click();"
+                                            icon="ui-icon-pencil"/>
+                                <p:menuitem value="#{myBundle.seeUnDesignateHospital}"
+                                            onclick="document.getElementById('ManagementOrganizationListForm:seeButton').click()"
+                                            icon="ui-icon-search"/>
+                                <p:menuitem value="#{myBundle.seeDesignateHospital}"
+                                            onclick="document.getElementById('ManagementOrganizationListForm:cannelButton').click()"
+                                            icon="ui-icon-search"/>
+                            </p:contextMenu>
+                            <p:dataTable id="datalist"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} "
+                                         currentPageReportTemplate="共{totalRecords}记录"
+                                         sortBy="#{item.managementOrganizationId}"
+                                         sortOrder="DESCENDING"
+                                         value="#{managementOrganizationController.lazyItems}"
+                                         lazy="true"
+                                         var="item"
+                                         paginator="true"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         selectionMode="single"
+                                         selection="#{managementOrganizationController.selected}"
+                                         filteredValue="#{managementOrganizationController.filteredItems}">
+
+                                <p:ajax event="rowSelect"
+                                        update="@form:createButton,@form:viewButton,@form:editButton,@form:seeButton,@form:cannelButton,@form:ManagementOrganizationDataTableContextMenu"/>
+                                <p:ajax event="rowUnselect"
+                                        update="@form:createButton,@form:viewButton,@form:editButton,@form:seeButton,@form:cannelButton,@form:ManagementOrganizationDataTableContextMenu"/>
+                                <p:ajax event="contextMenu"
+                                        update="@form:createButton @form:viewButton @form:editButton @form:seeButton,@form:cannelButton"/>
+                                <p:column sortBy="#{item.managementOrganizationCode}"
+                                          filterBy="#{item.managementOrganizationCode}" visible="true">
+                                    <f:facet name="header">
+                                        <h:outputText
+                                                value="#{myBundle.ListManagementOrganizationTitle_managementOrganizationCode}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.managementOrganizationCode}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.managementOrganizationName}"
+                                          filterBy="#{item.managementOrganizationName}" visible="true">
+                                    <f:facet name="header">
+                                        <h:outputText
+                                                value="#{myBundle.ListManagementOrganizationTitle_managementOrganizationName}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.managementOrganizationName}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.managementOrgShortname}"
+                                          filterBy="#{item.managementOrgShortname}" visible="true">
+                                    <f:facet name="header">
+                                        <h:outputText
+                                                value="#{myBundle.ListManagementOrganizationTitle_managementOrganizationShortname}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.managementOrgShortname}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.areaCode}" filterBy="#{item.areaCode}" visible="true">
+                                    <f:facet name="header">
+                                        <h:outputText
+                                                value="#{myBundle.ListManagementOrganizationTitle_managementOrganizationAreaCode}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.areaCode}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.recordCreator}" filterBy="#{item.recordCreator}"
+                                          visible="true">
+                                    <f:facet name="header">
+                                        <h:outputText
+                                                value="#{myBundle.ListManagementOrganizationTitle_managementOrganizationRecordCreator}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.recordCreator}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:dialog id="ManagementOrganizationSeeDialog" width="60%" modal="true" dynamic="true"
+                                      widgetVar="ManagementOrganizationSeeDialog"
+                                      header="#{myBundle.NoDesignateHospitalListTitle}">
+                                <p:dataTable id="datalistNoDesignateHospital"
+                                             value="#{managementOrganizationController.canDesignateHospital}"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} "
+                                             currentPageReportTemplate="共{totalRecords}记录"
+                                             sortBy="#{item.hospitalNumber}"
+                                             sortOrder="DESCENDING"
+                                             var="item"
+                                             lazy="true"
+                                             paginator="true"
+                                             rows="6"
+                                             rowsPerPageTemplate="6,12,18,24,30"
+                                             filteredValue="#{managementOrganizationController.filteredItems}">
+                                    <p:column sortBy="#{item.hospitalNumber}" filterBy="#{item.hospitalNumber}"
+                                              visible="true">
+                                        <f:facet name="header">
+                                            <h:outputText
+                                                    value="#{myBundle.ListNoDesignateHospitalTitle_hospitalNumber}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.hospitalNumber}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.hospitalName}" filterBy="#{item.hospitalName}"
+                                              visible="true">
+                                        <f:facet name="header">
+                                            <h:outputText
+                                                    value="#{myBundle.ListNoDesignateHospitalTitle_hospitalName}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.hospitalName}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.hospitalGrade}" filterBy="#{item.hospitalGrade}"
+                                              visible="true">
+                                        <f:facet name="header">
+                                            <h:outputText
+                                                    value="#{myBundle.ListNoDesignateHospitalTitle_hospitalGrade}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.hospitalGrade}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{myBundle.ListNoDesignateHospitalTitle_operation}"/>
+                                        </f:facet>
+                                        <p:commandButton id="designateButton"
+                                                         value="#{myBundle.Designate}"
+                                                         actionListener="#{managementOrganizationController.getDesignateHospital(item)}"
+                                                         oncomplete="PF('payWayDialog').show();">
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:dialog>
+
+                            <p:dialog id="ManagementOrganizationCannelDialog" width="60%" modal="true" dynamic="true"
+                                      widgetVar="ManagementOrganizationCannelDialog"
+                                      header="#{myBundle.designateHospitalListTitle}">
+                                <p:dataTable id="datalistDesignateHospital"
+                                             value="#{managementOrganizationController.alreadyDesignateHospital}"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} "
+                                             currentPageReportTemplate="共{totalRecords}记录"
+                                             sortBy="#{item.hospitalNumber}"
+                                             sortOrder="DESCENDING"
+                                             var="item"
+                                             lazy="true"
+                                             paginator="true"
+                                             rows="5"
+                                             rowKey="#{item.hospitalNumber}"
+                                             rowsPerPageTemplate="5,10,15,20"
+                                             filteredValue="#{managementOrganizationController.filteredItems}">
+                                    <p:column sortBy="#{item.hospitalNumber}" filterBy="#{item.hospitalNumber}"
+                                              visible="true">
+                                        <f:facet name="header">
+                                            <h:outputText
+                                                    value="#{myBundle.ListNoDesignateHospitalTitle_hospitalNumber}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.hospitalNumber}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.hospitalName}" filterBy="#{item.hospitalName}"
+                                              visible="true">
+                                        <f:facet name="header">
+                                            <h:outputText
+                                                    value="#{myBundle.ListNoDesignateHospitalTitle_hospitalName}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.hospitalName}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{myBundle.ListNoDesignateHospitalTitle_operation}"/>
+                                        </f:facet>
+                                        <p:commandButton id="undesignateButton"
+                                                         value="#{myBundle.undesignateButton}"
+                                                         actionListener="#{managementOrganizationController.delDesignateHospital(item.hospitalNumber)}"
+                                        />
+                                    </p:column>
+                                </p:dataTable>
+                            </p:dialog>
+                            <p:dialog id="payWayDialog" width="30%" modal="true" dynamic="true" widgetVar="payWayDialog"
+                                      header="#{myBundle.CreateDesignateHospitalLabel_payWay}">
+                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                    <p:outputLabel for="console"/>
+                                    <p:selectOneRadio id="console" value="#{managementOrganizationController.payWay}">
+                                        <f:selectItem itemValue="B" itemLabel="银行转账"/>
+                                        <f:selectItem itemValue="H" itemLabel="医院垫付"/>
+                                        <f:selectItem itemValue="P" itemLabel="预付款"/>
+                                    </p:selectOneRadio>
+                                </h:panelGrid>
+                                <p:commandButton value="#{myBundle.ConfirmDesignate}"
+                                                 actionListener="#{managementOrganizationController.saveDesignateInfo}"
+                                                 ajax="false"/>
+                            </p:dialog>
+                            <p:commandButton id="createButton" style="visibility: hidden;" icon="ui-icon-plus"
+                                             value="#{myBundle.Create}"
+                                             actionListener="#{managementOrganizationController.prepareCreate}"
+                                             update=":ManagementOrganizationCreateForm"
+                                             oncomplete="PF('ManagementOrganizationCreateDialog').show()"/>
+                            <p:commandButton id="viewButton" style="visibility: hidden;" icon="ui-icon-search"
+                                             value="#{myBundle.View}" update=":ManagementOrganizationViewForm"
+                                             oncomplete="PF('ManagementOrganizationViewDialog').show()"
+                                             disabled="#{empty managementOrganizationController.selected}"/>
+                            <p:commandButton id="editButton" style="visibility: hidden;" icon="ui-icon-pencil"
+                                             value="#{myBundle.Edit}" update=":ManagementOrganizationEditForm"
+                                             oncomplete="PF('ManagementOrganizationEditDialog').show()"
+                                             disabled="#{empty managementOrganizationController.selected}"/>
+                            <p:commandButton id="seeButton" style="visibility: hidden;" icon="ui-icon-search"
+                                             value="#{myBundle.seeUnDesignateHospital}"
+                                             oncomplete="PF('ManagementOrganizationSeeDialog').show()"
+                                             actionListener="#{managementOrganizationController.getNoDesignateHospital()}"/>
+                            <p:commandButton id="cannelButton" style="visibility: hidden;" icon="ui-icon-search"
+                                             value="#{myBundle.seeDesignateHospital}"
+                                             oncomplete="PF('ManagementOrganizationCannelDialog').show()"
+                                             disabled="#{empty managementOrganizationController.selected}"
+                                             actionListener="#{managementOrganizationController.getAlreadyDesognateHospital()}"/>
+
+                            <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>

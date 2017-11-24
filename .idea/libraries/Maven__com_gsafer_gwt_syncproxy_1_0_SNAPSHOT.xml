@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.gsafer:gwt-syncproxy:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gsafer/gwt-syncproxy/1.0-SNAPSHOT/gwt-syncproxy-1.0-20170816.071318-4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gsafer/gwt-syncproxy/1.0-SNAPSHOT/gwt-syncproxy-1.0-20170816.071318-4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gsafer/gwt-syncproxy/1.0-SNAPSHOT/gwt-syncproxy-1.0-20170816.071318-4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

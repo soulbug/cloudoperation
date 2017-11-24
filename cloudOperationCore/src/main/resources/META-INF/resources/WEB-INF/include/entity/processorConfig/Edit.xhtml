@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ProcessorConfigEditDlg" widgetVar="ProcessorConfigEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditProcessorConfigTitle}" closeOnEscape="true">
+
+            <h:form id="ProcessorConfigEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{processorConfigController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditProcessorConfigLabel_processorConfigId}" for="processorConfigId" />
+                        <h:outputText id="processorConfigId" value="#{processorConfigController.selected.processorConfigId}" />
+
+                        <p:outputLabel value="#{myBundle.EditProcessorConfigLabel_ip}" for="ip" />
+                        <p:inputText id="ip" value="#{processorConfigController.selected.ip}" title="#{myBundle.EditProcessorConfigTitle_ip}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorConfigLabel_eth}" for="eth" />
+                        <p:inputText id="eth" value="#{processorConfigController.selected.eth}" title="#{myBundle.EditProcessorConfigTitle_eth}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorConfigLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{processorConfigController.selected.status}" title="#{myBundle.EditProcessorConfigTitle_status}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorConfigLabel_gateway}" for="gateway" />
+                        <p:inputText id="gateway" value="#{processorConfigController.selected.gateway}" title="#{myBundle.EditProcessorConfigTitle_gateway}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorConfigLabel_netMask}" for="netMask" />
+                        <p:inputText id="netMask" value="#{processorConfigController.selected.netMask}" title="#{myBundle.EditProcessorConfigTitle_netMask}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorConfigLabel_createTime}" for="createTime" />
+                        <p:calendar id="createTime" pattern="yyyy-MM-dd HH:mm:ss" value="#{processorConfigController.selected.createTime}" title="#{myBundle.EditProcessorConfigTitle_createTime}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorConfigLabel_remark}" for="remark" />
+                        <p:inputText id="remark" value="#{processorConfigController.selected.remark}" title="#{myBundle.EditProcessorConfigTitle_remark}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorConfigLabel_hospitalOperation}" for="hospitalOperation" />
+                        <p:selectOneMenu id="hospitalOperation" value="#{processorConfigController.selected.hospitalOperation}" required="true" requiredMessage="#{myBundle.EditProcessorConfigRequiredMessage_hospitalOperation}" converter="hospitalOperationConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{hospitalOperationController.items}"
+                                           var="hospitalOperationItem"
+                                           itemValue="#{hospitalOperationItem}"
+                                           itemLabel="#{hospitalOperationItem.hospitalName.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:separator/>
+                    <p:commandButton icon="ui-icon-check" styleClass="Fright" actionListener="#{processorConfigController.save}" value="#{myBundle.Save}" update="display,:ProcessorConfigListForm:datalist,:ProcessorConfigListForm:ProcessorConfigDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProcessorConfigEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton  icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}" oncomplete="PF('ProcessorConfigEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

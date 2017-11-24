@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ProcessorMapEditDlg" widgetVar="ProcessorMapEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditProcessorMapTitle}" closeOnEscape="true">
+
+            <h:form id="ProcessorMapEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{processorMapController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditProcessorMapLabel_processorMapId}" for="processorMapId" />
+                        <h:outputText id="processorMapId" value="#{processorMapController.selected.processorMapId}" />
+
+                        <p:outputLabel value="#{myBundle.EditProcessorMapLabel_ip}" for="ip" />
+                        <p:inputText id="ip" value="#{processorMapController.selected.ip}" title="#{myBundle.EditProcessorMapTitle_ip}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorMapLabel_portIn}" for="portIn" />
+                        <p:inputText id="portIn" value="#{processorMapController.selected.portIn}" title="#{myBundle.EditProcessorMapTitle_portIn}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorMapLabel_portOut}" for="portOut" />
+                        <p:inputText id="portOut" value="#{processorMapController.selected.portOut}" title="#{myBundle.EditProcessorMapTitle_portOut}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorMapLabel_createTime}" for="createTime" />
+                        <p:calendar id="createTime" pattern="yyyy-MM-dd HH:mm:ss" value="#{processorMapController.selected.createTime}" title="#{myBundle.EditProcessorMapTitle_createTime}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorMapLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{processorMapController.selected.status}" title="#{myBundle.EditProcessorMapTitle_status}"/>
+
+                        <p:outputLabel value="#{myBundle.EditProcessorMapLabel_hospitalOperation}" for="hospitalOperation" />
+                        <p:selectOneMenu id="hospitalOperation" value="#{processorMapController.selected.hospitalOperation}" required="true" requiredMessage="#{myBundle.EditProcessorMapRequiredMessage_hospitalOperation}" converter="hospitalOperationConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{hospitalOperationController.items}"
+                                           var="hospitalOperationItem"
+                                           itemValue="#{hospitalOperationItem}"
+                                           itemLabel="#{hospitalOperationItem.hospitalName.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:separator/>
+                    <p:commandButton icon="ui-icon-check" styleClass="Fright" actionListener="#{processorMapController.save}" value="#{myBundle.Save}" update="display,:ProcessorMapListForm:datalist,:ProcessorMapListForm:ProcessorMapDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProcessorMapEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton  icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}" oncomplete="PF('ProcessorMapEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

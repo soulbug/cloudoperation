@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProcessorRouteCreateDlg" widgetVar="ProcessorRouteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateProcessorRouteTitle}" closeOnEscape="true">
+        <!--<p:dialog id="ProcessorRouteCreateDlg" widgetVar="ProcessorRouteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{processorConfigController.selected.toString()}" closeOnEscape="true">-->
+
+            <h:form id="ProcessorRouteCreateForm">
+
+                <h:panelGroup id="display" rendered="#{processorRouteController.selected != null}">
+
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateProcessorRouteLabel_eth}" for="eth" />
+                        <p:selectOneMenu id="eth" value="#{processorRouteController.selected.eth}"
+                                         style="width:125px"
+                                         title="#{myBundle.CreateProcessorConfigLabel_eth}" required="true">
+                            <f:selectItem itemLabel="eth1" itemValue="1"/>
+                            <f:selectItem itemLabel="eth0" itemValue="0"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.CreateProcessorRouteLabel_gateway}" for="gateway" />
+                        <p:inputText id="gateway" value="#{processorRouteController.selected.gateway}" title="#{myBundle.CreateProcessorRouteTitle_gateway}" required="true">
+                            <f:validator validatorId="com.gsafer.smartoperation.validator" />
+                            <f:attribute name="msg" value="ip"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="#{myBundle.CreateProcessorRouteLabel_netmask}" for="netmask" />
+                        <p:inputText id="netmask" value="#{processorRouteController.selected.netmask}" title="#{myBundle.CreateProcessorRouteTitle_netmask}">
+                            <f:validator validatorId="com.gsafer.smartoperation.validator" />
+                            <f:attribute name="msg" value="segment"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="#{myBundle.CreateProcessorRouteLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{processorRouteController.selected.status}" title="#{myBundle.CreateProcessorRouteTitle_status}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProcessorRouteLabel_createTime}" for="createTime" />
+                        <p:calendar id="createTime" pattern="yyyy-MM-dd HH:mm:ss" value="#{processorRouteController.selected.createTime}" title="#{myBundle.CreateProcessorRouteTitle_createTime}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProcessorRouteLabel_remark}" for="remark" />
+                        <p:inputText id="remark" value="#{processorRouteController.selected.remark}" title="#{myBundle.CreateProcessorRouteTitle_remark}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProcessorRouteLabel_hospitalOperation}" for="hospitalOperation" />
+                        <p:selectOneMenu id="hospitalOperation" value="#{processorRouteController.selected.hospitalOperation}" required="true" requiredMessage="#{myBundle.CreateProcessorRouteRequiredMessage_hospitalOperation}" converter="hospitalOperationConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{hospitalOperationController.items}"
+                                           var="hospitalOperationItem"
+                                           itemValue="#{hospitalOperationItem}"
+                                           itemLabel="#{hospitalOperationItem.hospitalName.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:separator/>
+                    <p:commandButton  icon="ui-icon-check" styleClass="Fright" actionListener="#{processorRouteController.saveNew}" value="#{myBundle.Save}" update="display,:ProcessorRouteListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProcessorRouteCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}" oncomplete="PF('ProcessorRouteCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

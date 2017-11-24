@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card ShadowEffect  ">
+                <div class="Container100">
+                    <div class="ContainerIndent">
+
+                        <!-- 外部菜单 -->
+
+                        <h:form id="NoTreatmentMecicalListForm">
+
+                            <!-- 导出菜单 -->
+                            <h2 class="CardTopic Fs22">
+                                <i class="icon-google132 Fs20 Fleft MarRight10 OvHidden"/>#{myBundle.NoTreatmentTitle}
+
+                                <p:commandButton id="exportNoTreatmentExcel"
+                                                 value="#{myBundle.NoTreatmentMedicalHospitalButton_export}"
+                                                 style="float: right"
+                                                 action="#{medicalNoTreatmentHospitalController.exportNotreatmentExcel}"
+                                                 ajax="false"/>
+
+                                <p:commandButton id="exportTreatmentMedicalButton"
+                                                 value="#{myBundle.TreatmentMedicalHospitalButton_export}"
+                                                 style="float: right"
+                                                 oncomplete="PF('exportTreatmentMedical').show();"/>
+
+                                <p:commandButton id="importTreatmentMedicalButton"
+                                                 value="#{myBundle.NoTreatmentMedicalHospitalButton_imp}"
+                                                 style="float: right"
+                                                 oncomplete="PF('importTreatmentMedical').show();"/>
+                            </h2>
+
+                            <p:dataTable id="datalist"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} "
+                                         currentPageReportTemplate="共{totalRecords}记录"
+                                         sortBy="#{item.hospitalNumber}"
+                                         sortOrder="DESCENDING"
+                                         value="#{noTreatmentScheduleController.noTreatmentMedicalInfos}"
+                                         var="item"
+                                         paginator="true"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50">
+
+                                <p:column sortBy="#{item.hospitalNumber}" filterBy="#{item.hospitalNumber}"
+                                          visible="true">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{myBundle.ListNoTreatmentTitle_hospitalNumber}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.hospitalNumber}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.hospitalName}" filterBy="#{item.hospitalName}"
+                                          visible="true">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{myBundle.ListNoTreatmentTitle_hospitalName}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.hospitalName}"/>
+                                </p:column>
+                                <p:column sortBy="#{item.size}" filterBy="#{item.size}"
+                                          visible="true">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{myBundle.ListNoTreatmentTitle_size}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.size}"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <!--已对码医疗目录导入dialog-->
+                            <p:dialog modal="true" id="importTreatmentMedical" header="#{myBundle.NoTreatmentMedicalHospitalButton_imp}"
+                                      widgetVar="importTreatmentMedical" dynamic="true">
+                                <h:form>
+                                    <p:fileUpload
+                                            fileUploadListener="#{medicalNoTreatmentHospitalController.handleFileUpload}"
+                                            mode="advanced" dragDropSupport="false"
+                                            multiple="true" update="messages" sizeLimit="10000000" fileLimit="3"
+                                            allowTypes="/(\.|\/)(xls|xlsx)$/" oncomplete="PF('importTreatmentMedical').hide()"/>
+                                    <p:growl id="messages" showDetail="true"/>
+                                </h:form>
+                            </p:dialog>
+
+                            <!--已对码医疗目录导出dialog-->
+                            <p:dialog width="60%" modal="true" id="exportTreatmentMedical" header="#{myBundle.TreatmentMedicalHospitalButton_export}"
+                                      widgetVar="exportTreatmentMedical" dynamic="true">
+                                <p:dataTable id="hospitalDataList"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} "
+                                             currentPageReportTemplate="共{totalRecords}记录"
+                                             sortBy="#{item.hospitalOperationId}"
+                                             sortOrder="DESCENDING"
+                                             value="#{hospitalOperationController.hospitalOperationList}"
+                                             lazy="true"
+                                             var="item"
+                                             paginator="true"
+                                             rowKey="#{item.hospitalNumber}"
+                                             rows="10"
+                                             rowsPerPageTemplate="10,20,30,40,50"
+                                             selection="#{hospitalOperationController.selected}"
+                                             filteredValue="#{hospitalOperationController.filteredItems}">
+                                    <p:column sortBy="#{item.hospitalNumber}" filterBy="#{item.hospitalNumber}"
+                                              visible="true">
+                                        <f:facet name="header">
+                                            <h:outputText
+                                                    value="#{myBundle.ListNoTreatmentTitle_hospitalNumber}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.hospitalNumber}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.hospitalName}" filterBy="#{item.hospitalName}"
+                                              visible="true">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{myBundle.ListNoTreatmentTitle_hospitalName}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.hospitalName}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{myBundle.todo}"/>
+                                        </f:facet>
+                                        <p:button value="#{myBundle.export}"
+                                                  onclick="exportExcel('#{medicalNoTreatmentHospitalController.publicDataPlatformUrl}','#{item.hospitalNumber}')"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:dialog>
+
+                            <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<h:outputScript>
+    function exportExcel(vpnIp,hospitalNumber){
+        window.open(vpnIp+"/download/exportMedicalTreatmentHospital.action?hospitalNumber="+hospitalNumber+"")
+    }
+</h:outputScript>
+</ui:composition>
+

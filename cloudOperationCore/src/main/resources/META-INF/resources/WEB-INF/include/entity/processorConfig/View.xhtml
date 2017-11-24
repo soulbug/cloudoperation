@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProcessorConfigViewDlg" widgetVar="ProcessorConfigViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewProcessorConfigTitle}" closeOnEscape="true">
+
+            <h:form id="ProcessorConfigViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{processorConfigController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_processorConfigId}"/>
+                        <h:outputText value="#{processorConfigController.selected.processorConfigId}" title="#{myBundle.ViewProcessorConfigTitle_processorConfigId}"/>
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_ip}"/>
+                        <h:outputText value="#{processorConfigController.selected.ip}" title="#{myBundle.ViewProcessorConfigTitle_ip}"/>
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_eth}"/>
+                        <h:outputText value="#{processorConfigController.selected.eth}" title="#{myBundle.ViewProcessorConfigTitle_eth}"/>
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_status}"/>
+                        <h:outputText value="#{processorConfigController.selected.status}" title="#{myBundle.ViewProcessorConfigTitle_status}"/>
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_gateway}"/>
+                        <h:outputText value="#{processorConfigController.selected.gateway}" title="#{myBundle.ViewProcessorConfigTitle_gateway}"/>
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_netMask}"/>
+                        <h:outputText value="#{processorConfigController.selected.netMask}" title="#{myBundle.ViewProcessorConfigTitle_netMask}"/>
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_createTime}"/>
+                        <h:outputText value="#{processorConfigController.selected.createTime}" title="#{myBundle.ViewProcessorConfigTitle_createTime}">
+                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_remark}"/>
+                        <h:outputText value="#{processorConfigController.selected.remark}" title="#{myBundle.ViewProcessorConfigTitle_remark}"/>
+
+                        <h:outputText value="#{myBundle.ViewProcessorConfigLabel_hospitalOperation}"/>
+                        <h:outputText value="#{processorConfigController.selected.hospitalOperation.hospitalName}"/>
+                    </p:panelGrid>
+                    <p:separator/>  
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('ProcessorConfigViewDialog').hide()" icon="ui-icon-close" styleClass="Fright"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

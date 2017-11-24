@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+    <p:dialog id="ProcessorConfigCreateDlg" widgetVar="ProcessorConfigCreateDialog" modal="true" resizable="false"
+              appendTo="@(body)" header="#{myBundle.CreateProcessorConfigTitle}" closeOnEscape="true">
+
+        <h:form id="ProcessorConfigCreateForm">
+
+            <h:panelGroup id="display" rendered="#{processorConfigController.selected != null}">
+                <p:panelGrid columns="2" columnClasses="column">
+
+                    <p:outputLabel value="#{myBundle.CreateProcessorConfigLabel_ip}" for="ip"/>
+                    <p:inputText id="ip" value="#{processorConfigController.selected.ip}"
+                                 title="#{myBundle.CreateProcessorConfigTitle_ip}" required="true">
+                        <f:validator validatorId="com.gsafer.smartoperation.validator"/>
+                        <f:attribute name="msg" value="ip"/>
+                    </p:inputText>
+
+                    <p:outputLabel value="#{myBundle.CreateProcessorConfigLabel_eth}" for="eth"/>
+                  <!-- <p:inputText id="eth" value="#{processorConfigController.selected.eth}" title="#{myBundle.CreateProcessorConfigTitle_eth}"/>-->
+                 <p:selectOneMenu id="eth" value="#{processorConfigController.selected.eth}"
+                                      style="width:125px"
+                                      title="#{myBundle.CreateProcessorConfigLabel_eth}" required="true">
+                    <f:selectItem itemLabel="请选择网卡编号" itemValue=""/>
+                    <f:selectItem itemLabel="eth0" itemValue="0" />
+                    <f:selectItem itemLabel="eth1" itemValue="1" />
+                </p:selectOneMenu>
+                    <p:outputLabel value="#{myBundle.CreateProcessorConfigLabel_status}" for="status"/>
+                    <p:inputText id="status" value="#{processorConfigController.selected.status}"
+                                 title="#{myBundle.CreateProcessorConfigTitle_status}"/>
+
+                    <p:outputLabel value="#{myBundle.CreateProcessorConfigLabel_gateway}" for="gateway"/>
+                    <p:inputText id="gateway" value="#{processorConfigController.selected.gateway}"
+                                 title="#{myBundle.CreateProcessorConfigTitle_gateway}">
+                        <f:validator validatorId="com.gsafer.smartoperation.validator"/>
+                        <f:attribute name="msg" value="gw"/>
+                    </p:inputText>
+
+                    <p:outputLabel value="#{myBundle.CreateProcessorConfigLabel_netMask}" for="netMask" />
+                    <p:inputText id="netMask" value="#{processorConfigController.selected.netMask}"
+                                 title="#{myBundle.CreateProcessorConfigTitle_netMask}" required="true">
+                        <f:validator validatorId="com.gsafer.smartoperation.validator"/>
+                        <f:attribute name="msg" value="mask"/>
+                    </p:inputText>
+
+                    <p:outputLabel value="#{myBundle.CreateProcessorConfigLabel_createTime}" for="createTime"/>
+                    <p:calendar id="createTime" pattern="yyyy-MM-dd HH:mm:ss"
+                                value="#{processorConfigController.selected.createTime}"
+                                title="#{myBundle.CreateProcessorConfigTitle_createTime}" showOn="button"/>
+
+                    <p:outputLabel value="#{myBundle.CreateProcessorConfigLabel_remark}" for="remark"/>
+                    <p:inputText id="remark" value="#{processorConfigController.selected.remark}"
+                                 title="#{myBundle.CreateProcessorConfigTitle_remark}"/>
+
+                    <p:outputLabel value="#{myBundle.CreateProcessorConfigLabel_hospitalOperation}"
+                                   for="hospitalOperation"/>
+                    <p:selectOneMenu id="hospitalOperation"
+                                     value="#{processorConfigController.selected.hospitalOperation}" required="true"
+                                     requiredMessage="#{myBundle.CreateProcessorConfigRequiredMessage_hospitalOperation}"
+                                     converter="hospitalOperationConverter">
+                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{hospitalOperationController.items}"
+                                       var="hospitalOperationItem"
+                                       itemValue="#{hospitalOperationItem}"
+                                       itemLabel="#{hospitalOperationItem.hospitalName.toString()}"
+                        />
+
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton icon="ui-icon-check" styleClass="Fright"
+                                 actionListener="#{processorConfigController.saveNew}" value="#{myBundle.Save}"
+                                 update="display,:ProcessorConfigListForm:datalist,:growl"
+                                 oncomplete="handleSubmit(xhr,status,args,PF('ProcessorConfigCreateDialog'));">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}"
+                               icon="ui-icon-alert"/>
+                </p:commandButton>
+
+                <p:commandButton icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}"
+                                 oncomplete="PF('ProcessorConfigCreateDialog').hide()" update="display" process="@this"
+                                 immediate="true" resetValues="true"/>
+            </h:panelGroup>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>
+
+</html>

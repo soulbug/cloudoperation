@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+    <p:dialog id="HospitalInfoEditDlg" widgetVar="HospitalInfoEditDialog" modal="true" resizable="false"
+              appendTo="@(body)" header="#{myBundle.EditHospitalOperationTitle}" closeOnEscape="true">
+        <h:form id="HospitalInfoEditForm">
+            <h:panelGroup id="display">
+                <p:panelGrid  columns="4" columnClasses="column"  rendered="#{hospitalInfoController.hospitalInfoCis != null}">
+
+                    <p:outputLabel value="#{myBundle.hospitalKey}" for="hospitalKey" />
+                    <p:inputText id="hospitalKey" value="#{hospitalInfoController.hospitalInfoCis.HKey}" readonly="true"/>
+
+                    <p:outputLabel value="#{myBundle.createTime}" for="createTime" />
+                    <p:inputText id="createTime" value="#{hospitalInfoController.hospitalInfoCis.recordCreateTime}" readonly="true">
+                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"></f:convertDateTime>
+                    </p:inputText>
+
+                    <p:outputLabel value="#{myBundle.creator}" for="creator" />
+                    <p:inputText id="creator" value="#{hospitalInfoController.hospitalInfoCis.recordCreator}" rendered="true"/>
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_hospitalName}" for="hospitalName"/>
+                    <p:inputText id="hospitalName" value="#{hospitalInfoController.hospitalInfoCis.hospitalName}"
+                                 title="#{myBundle.EditHospitalOperationTitle_hospitalName}" />
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_hospitalNumber}" for="hospitalNumber"/>
+                    <p:inputText id="hospitalNumber" value="#{hospitalInfoController.hospitalInfoCis.hospitalNumber}"
+                                 title="#{myBundle.EditHospitalOperationTitle_hospitalNumber}" readonly="true"/>
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_hospitalGrade}" for="hospitalGrade"/>
+                    <p:inputText id="hospitalGrade" value="#{hospitalInfoController.hospitalInfoCis.hospitalGrade}"
+                                 title="#{myBundle.EditHospitalOperationTitle_hospitalGrade}" readonly="true"/>
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_areaCode}" for="areaCode"/>
+                    <p:inputText id="areaCode" value="#{hospitalInfoController.hospitalInfoCis.areacode}"
+                                 title="#{myBundle.EditHospitalOperationTitle_areaCode}" readonly="true"/>
+                    <p:outputLabel value="#{myBundle.rabbitmqUser}" for="rubbitmqUser"/>
+                    <p:inputText id="rubbitmqUser" value="#{hospitalInfoController.hospitalInfoCis.rubbitMQUSER}" required="true"/>
+
+                    <p:outputLabel value="#{myBundle.rabbitmqPass}" for="rubbitmqPass"/>
+                    <p:inputText id="rubbitmqPass" value="#{hospitalInfoController.hospitalInfoCis.rubbitMQPASS}" required="true" />
+
+                    <p:outputLabel value="#{myBundle.rabbitmqUrl}" for="rubbitmqUrl"/>
+                    <p:inputText id="rubbitmqUrl" value="#{hospitalInfoController.hospitalInfoCis.rubbitMQURL}" required="true">
+                        <f:validator validatorId="com.gsafer.smartoperation.validator"/>
+                        <f:attribute name="msg" value="ip"/>
+                    </p:inputText>
+
+                    <p:outputLabel value="#{myBundle.rabbitmqPort}" for="rubbitmqPort"/>
+                    <p:inputText id="rubbitmqPort" value="#{hospitalInfoController.hospitalInfoCis.rubbitPORT}" required="true" />
+
+                    <p:outputLabel value="#{myBundle.rabbitmqVirtualhost}" for="rubbitmqVirtualhost"/>
+                    <p:inputText id="rubbitmqVirtualhost"
+                                 value="#{hospitalInfoController.hospitalInfoCis.rubbitVIRTUALHOST}" required="true" />
+
+                    <p:outputLabel value="#{myBundle.linkman}" for="linkman"/>
+                    <p:inputText id="linkman" value="#{hospitalInfoController.hospitalInfoCis.linkman}"/>
+
+                    <p:outputLabel value="#{myBundle.mobilephone}" for="mobilephone"/>
+                    <p:inputText id="mobilephone" value="#{hospitalInfoController.hospitalInfoCis.mobilephone}"/>
+
+                    <p:outputLabel value="#{myBundle.telephone}" for="telephone"/>
+                    <p:inputText id="telephone" value="#{hospitalInfoController.hospitalInfoCis.telephone}"/>
+
+                    <p:outputLabel value="#{myBundle.address}" for="address"/>
+                    <p:inputText id="address" value="#{hospitalInfoController.hospitalInfoCis.address}"/>
+
+                    <p:outputLabel value="#{myBundle.bank}" for="bank"/>
+                    <p:inputText id="bank" value="#{hospitalInfoController.hospitalInfoCis.bank}"/>
+
+                    <p:outputLabel value="#{myBundle.accounts}" for="accounts"/>
+                    <p:inputText id="accounts" value="#{hospitalInfoController.hospitalInfoCis.accounts}"/>
+
+                    <p:outputLabel value="#{myBundle.inHospitalNumberFlag}" for="inHospitalNumberFlag"/>
+                    <p:selectOneMenu id="inHospitalNumberFlag"
+                                     value="#{hospitalInfoController.hospitalInfoCis.inHospitalFlag}"
+                                     style="width:125px" required="true">
+                        <f:selectItem itemValue="1" itemLabel="住院号唯一"/>
+                        <f:selectItem itemValue="0" itemLabel="住院号不唯一"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="#{myBundle.useClientType}" for="useClientType"/>
+                    <p:selectOneMenu id="useClientType"
+                                     value="#{hospitalInfoController.hospitalInfoCis.useClientType}"
+                                     style="width:125px" required="true">
+                        <f:selectItem itemValue="2" itemLabel="新方式"/>
+                        <f:selectItem itemValue="1" itemLabel="老方式"/>
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton icon="ui-icon-check" styleClass="Fright"
+                                 actionListener="#{hospitalInfoController.edit}" value="#{myBundle.Save}"
+                                 update="display,:HospitalInfoListForm:datalist,:HospitalInfoListForm:HospitalInfoDataTableContextMenu,:growl"
+                                 oncomplete="handleSubmit(xhr,status,args,PF('HospitalInfoEditDialog'));">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}"
+                               icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}"
+                                 oncomplete="PF('HospitalInfoEditDialog').hide()" update="display" process="@this"
+                                 immediate="true" resetValues="true"/>
+            </h:panelGroup>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>
+
+</html>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+    <p:dialog id="HospitalInfoViewDlg" widgetVar="HospitalInfoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewHospitalOperationTitle}" closeOnEscape="true">
+
+        <h:form id="HospitalInfoViewForm">
+
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" columnClasses="column" rendered="#{hospitalInfoController.hospitalInfoCis != null}">
+
+                    <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalOperationId}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.hospitalNumber}" />
+
+                    <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalName}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.hospitalName}" title="#{myBundle.ViewHospitalOperationTitle_hospitalName}"/>
+
+                    <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalNumber}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.hospitalNumber}" title="#{myBundle.ViewHospitalOperationTitle_hospitalNumber}"/>
+
+                    <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalGrade}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.hospitalGrade}" title="#{myBundle.ViewHospitalOperationTitle_hospitalGrade}"/>
+
+                    <h:outputText value="#{myBundle.ViewHospitalOperationLabel_areaCode}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.areacode}" />
+
+                    <h:outputText value="#{myBundle.hospitalKey}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.HKey}" />
+
+                    <h:outputText value="#{myBundle.rabbitmqPass}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.rubbitMQPASS}" />
+
+                    <h:outputText value="#{myBundle.rabbitmqPort}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.rubbitPORT}" />
+
+                    <h:outputText value="#{myBundle.rabbitmqUrl}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.rubbitMQURL}" />
+
+                    <h:outputText value="#{myBundle.rabbitmqUser}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.rubbitMQUSER}" />
+
+                    <h:outputText value="#{myBundle.rabbitmqVirtualhost}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.rubbitVIRTUALHOST}" />
+
+                    <h:outputText value="#{myBundle.inHospitalNumberFlag}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.inHospitalFlag}" />
+
+                    <h:outputText value="#{myBundle.accounts}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.accounts}" />
+
+                    <h:outputText value="#{myBundle.bank}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.bank}" />
+
+                    <h:outputText value="#{myBundle.linkman}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.linkman}" />
+
+                    <h:outputText value="#{myBundle.mobilephone}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.mobilephone}" />
+
+                    <h:outputText value="#{myBundle.telephone}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.telephone}" />
+
+                    <h:outputText value="#{myBundle.ViewHospitalOperationLabel_createTime}"/>
+                    <h:outputText value="#{hospitalInfoController.hospitalInfoCis.recordCreateTime}" >
+                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+                    </h:outputText>
+
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton value="#{myBundle.Close}" onclick="PF('HospitalInfoViewDialog').hide()" icon="ui-icon-close" styleClass="Fright"/>
+            </h:panelGroup>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>
+
+</html>

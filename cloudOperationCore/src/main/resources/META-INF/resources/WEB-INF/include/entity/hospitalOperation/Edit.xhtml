@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+    <p:dialog id="HospitalOperationEditDlg" widgetVar="HospitalOperationEditDialog" modal="true" resizable="false"
+              appendTo="@(body)" header="#{myBundle.EditHospitalOperationTitle}" closeOnEscape="true">
+
+        <h:form id="HospitalOperationEditForm">
+
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" columnClasses="column"
+                             rendered="#{hospitalOperationController.selected != null}">
+
+
+                    <h:outputLabel value="#{myBundle.EditHospitalOperationLabel_hospitalOperationId}"
+                                   for="hospitalOperationId"/>
+                    <h:outputText id="hospitalOperationId"
+                                  value="#{hospitalOperationController.selected.hospitalOperationId}"/>
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_hospitalName}" for="hospitalName"/>
+                    <p:inputText id="hospitalName" value="#{hospitalOperationController.selected.hospitalName}"
+                                 title="#{myBundle.EditHospitalOperationTitle_hospitalName}" readonly="true"/>
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_hospitalNumber}" for="hospitalNumber"/>
+                    <p:inputText id="hospitalNumber" value="#{hospitalOperationController.selected.hospitalNumber}"
+                                 title="#{myBundle.EditHospitalOperationTitle_hospitalNumber}" readonly="true"/>
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_hospitalGrade}" for="hospitalGrade"/>
+                    <p:inputText id="hospitalGrade" value="#{hospitalOperationController.selected.hospitalGrade}"
+                                 title="#{myBundle.EditHospitalOperationTitle_hospitalGrade}" readonly="true"/>
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_areaCode}" for="areaCode"/>
+                    <p:inputText id="areaCode" value="#{hospitalOperationController.selected.areaCode}"
+                                 title="#{myBundle.EditHospitalOperationTitle_areaCode}" readonly="true"/>
+
+                    <!--<p:outputLabel value="#{myBundle.EditHospitalOperationLabel_hospitalKey}" for="hospitalKey" />-->
+                    <!--<p:inputText id="hospitalKey" value="#{hospitalOperationController.selected.hospitalKey}" title="#{myBundle.EditHospitalOperationTitle_hospitalKey}" readonly="true"/>-->
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_processorMac}" for="processorMac"/>
+                    <p:inputText id="processorMac" value="#{hospitalOperationController.selected.processorMac}"
+                                 title="#{myBundle.EditHospitalOperationTitle_processorMac}" readonly="true"/>
+                    <p:outputLabel value="#{myBundle.catagory}" for="catagory"/>
+                    <p:selectOneMenu id="catagory"
+                                     value="#{hospitalOperationController.selected.category}"
+                                     style="width:125px" required="true">
+                        <f:selectItem itemValue="" itemLabel="请选择前置机类别"/>
+                        <f:selectItem itemValue="1" itemLabel="接口前置机"/>
+                        <f:selectItem itemValue="0" itemLabel="普通前置机"/>
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel value="#{myBundle.EditHospitalOperationLabel_remark}" for="remark"/>
+                    <p:inputText id="remark" value="#{hospitalOperationController.selected.remark}"
+                                 title="#{myBundle.EditHospitalOperationTitle_remark}"/>
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton icon="ui-icon-check" styleClass="Fright"
+                                 actionListener="#{hospitalOperationController.save}" value="#{myBundle.Save}"
+                                 update="display,:HospitalOperationListForm:datalist,:HospitalOperationListForm:HospitalOperationDataTableContextMenu,:growl"
+                                 oncomplete="handleSubmit(xhr,status,args,PF('HospitalOperationEditDialog'));">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}"
+                               icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}"
+                                 oncomplete="PF('HospitalOperationEditDialog').hide()" update="display" process="@this"
+                                 immediate="true" resetValues="true"/>
+            </h:panelGroup>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>
+
+</html>

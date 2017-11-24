@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="com.gsafer.smartoperation.entity" v="4.2.2" rws="_1502027552580135" Pws="_1502027552580135" cws="_1502027552580135" sm="false" xs="false" id="_15020265652971" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProcessorConfigPK" abs="false" class="ProcessorConfig" v="true" jbn="false" m="false" rootElement="_15020265652971" id="_15020265653092">
+        <jpa:ts e="true">
+            <jpa:a>_15020265653147</jpa:a>
+            <jpa:a>_150202656531511</jpa:a>
+            <jpa:a>_150202656531517</jpa:a>
+            <jpa:a>_150202656531516</jpa:a>
+            <jpa:a>_150202656531518</jpa:a>
+            <jpa:a>_150202656531519</jpa:a>
+            <jpa:a>_150202656531512</jpa:a>
+            <jpa:a>_1502027918679142</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_15020265653147</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_15020265653147</jpa:a>
+        </jpa:eq>
+        <jpa:jbdf/>
+        <jpa:jbnf/>
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="ip" id="_150202656531511">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="IP" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_CONFIG" length="16"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="short" v="true" name="eth" id="_150202656531517">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ETH" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_CONFIG" precision="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="short" v="true" name="status" id="_150202656531516">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="STATUS" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_CONFIG" precision="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="gateway" id="_150202656531518">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="GATEWAY" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_CONFIG" length="16"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="netMask" id="_150202656531519">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="NETMASK" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_CONFIG" length="16"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="createTime" dv="new java.util.Date();" id="_150202656531512">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+                <jpa:column name="CREATE_TIME" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_CONFIG"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="remark" id="_1502027918679142">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="REMARK" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_CONFIG" length="50"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_15020265653104" v="true" name="hospitalOperation" id="_1502027883756141">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="HOSPITAL_OPERATION_ID" rc="HOSPITAL_OPERATION_ID" unique="false" nullable="false" insertable="true" updatable="false" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="processorConfigId" id="_15020265653147">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PROCESSOR_CONFIG_ID" unique="false" nullable="false" insertable="true" updatable="true" table="T_PROCESSOR_CONFIG"/>
+                <jpa:generated-value strategy="SEQUENCE" generator="s_t_processor_config"/>
+                <jpa:sequence-generator name="s_t_processor_config" sequence-name="s_t_processor_config" catalog="" schema="" initial-value="1" allocation-size="50"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:el/>
+        <jpa:table name="T_PROCESSOR_CONFIG"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="HospitalOperationPK" abs="false" class="HospitalOperation" v="true" jbn="false" m="false" rootElement="_15020265652971" id="_15020265653104">
+        <jpa:ts e="true">
+            <jpa:a>_150202656531526</jpa:a>
+            <jpa:a>_150202656531528</jpa:a>
+            <jpa:a>_150202656531529</jpa:a>
+            <jpa:a>_150202656531530</jpa:a>
+            <jpa:a>_150202656531532</jpa:a>
+            <jpa:a>_150202656531536</jpa:a>
+            <jpa:a>_150202656531527</jpa:a>
+            <jpa:a>_150202656531539</jpa:a>
+            <jpa:a>_150202656531535</jpa:a>
+            <jpa:a>_150202656531533</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_150202656531526</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_150202656531526</jpa:a>
+        </jpa:eq>
+        <jpa:jbdf/>
+        <jpa:jbnf/>
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="hospitalName" id="_150202656531528">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="HOSPITAL_NAME" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="hospitalNumber" id="_150202656531529">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="HOSPITAL_NUMBER" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION" length="16"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="hospitalGrade" id="_150202656531530">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="HOSPITAL_GRADE" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION" length="12"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="areaCode" id="_150202656531532">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="AREA_CODE" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION" length="6"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="hospitalKey" id="_150202656531536">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="HOSPITAL_KEY" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="processorMac" id="_150202656531527">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PROCESSOR_MAC" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION" length="16"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="short" v="true" name="status" id="_150202656531539">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="STATUS" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION" precision="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="createTime" dv="new java.util.Date();" id="_150202656531535">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+                <jpa:column name="CREATE_TIME" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="remark" id="_150202656531533">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="REMARK" unique="false" nullable="true" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION" length="50"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Integer" v="true" name="hospitalOperationId" id="_150202656531526">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="HOSPITAL_OPERATION_ID" unique="false" nullable="false" insertable="true" updatable="true" table="T_HOSPITAL_OPERATION"/>
+                <jpa:generated-value strategy="SEQUENCE" generator="S_T_HOSPITAL_OPERATION"/>
+                <jpa:sequence-generator name="S_T_HOSPITAL_OPERATION" sequence-name="S_T_HOSPITAL_OPERATION" catalog="" schema="" initial-value="1" allocation-size="50"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:el/>
+        <jpa:table name="T_HOSPITAL_OPERATION"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProcessorMapPK" abs="false" class="ProcessorMap" v="true" jbn="false" m="false" rootElement="_15020265652971" id="_15020265653105">
+        <jpa:ts e="true">
+            <jpa:a>_150202656531540</jpa:a>
+            <jpa:a>_150202656531541</jpa:a>
+            <jpa:a>_150202656531542</jpa:a>
+            <jpa:a>_150202656531543</jpa:a>
+            <jpa:a>_150202656531544</jpa:a>
+            <jpa:a>_150202656531548</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_150202656531540</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_150202656531540</jpa:a>
+        </jpa:eq>
+        <jpa:jbdf/>
+        <jpa:jbnf/>
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="ip" id="_150202656531541">
+                <jpa:des>前置机内网映射ip</jpa:des>
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="IP" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_MAP" length="16"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="short" v="true" name="portIn" ft="false" id="_150202656531542">
+                <jpa:des>前置机内网映射端口内网</jpa:des>
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PORT_IN" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_MAP" precision="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="short" v="true" name="portOut" id="_150202656531543">
+                <jpa:des>前置机内网映射端口外网</jpa:des>
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PORT_OUT" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_MAP" precision="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="createTime" dv="new java.util.Date();" id="_150202656531544">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+                <jpa:column name="CREATE_TIME" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_MAP"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="short" v="true" name="status" id="_150202656531548">
+                <jpa:des>状态：0为正常，1为被删除</jpa:des>
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="STATUS" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_MAP" precision="0"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_15020265653104" v="true" name="hospitalOperation" id="_1502028190335144">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="HOSPITAL_OPERATION_ID" rc="HOSPITAL_OPERATION_ID" unique="false" nullable="false" insertable="true" updatable="false" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="processorMapId" id="_150202656531540">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PROCESSOR_MAP_ID" unique="false" nullable="false" insertable="true" updatable="true" table="T_PROCESSOR_MAP"/>
+                <jpa:generated-value strategy="SEQUENCE" generator="S_T_PROCESSOR_MAP"/>
+                <jpa:sequence-generator name="S_T_PROCESSOR_MAP" sequence-name="S_T_PROCESSOR_MAP" catalog="" schema="" initial-value="1" allocation-size="50"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:el/>
+        <jpa:table name="T_PROCESSOR_MAP"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProcessorRoutePK" abs="false" class="ProcessorRoute" v="true" jbn="false" m="false" rootElement="_15020265652971" id="_15020265653106">
+        <jpa:ts e="true">
+            <jpa:a>_150202656531549</jpa:a>
+            <jpa:a>_150202656531552</jpa:a>
+            <jpa:a>_150202656531551</jpa:a>
+            <jpa:a>_150202656531550</jpa:a>
+            <jpa:a>_150202656531558</jpa:a>
+            <jpa:a>_150202656531554</jpa:a>
+            <jpa:a>_1502028459011302</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_150202656531549</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_150202656531549</jpa:a>
+        </jpa:eq>
+        <jpa:jbdf/>
+        <jpa:jbnf/>
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="short" v="true" name="eth" id="_150202656531552">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PROCESSOR_ROUTE_ETH" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_ROUTE" precision="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="gateway" id="_150202656531551">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PROCESSOR_ROUTE_GATEWAY" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_ROUTE" length="16"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="netmask" id="_150202656531550">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PROCESSOR_ROUTE_NETMASK" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_ROUTE" length="20"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="short" v="true" name="status" id="_150202656531558">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="STATUS" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_ROUTE" precision="0"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="createTime" dv="new java.util.Date();" id="_150202656531554">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+                <jpa:column name="CREATE_TIME" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_ROUTE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="remark" id="_1502028459011302">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="REMARK" unique="false" nullable="true" insertable="true" updatable="true" table="T_PROCESSOR_ROUTE" length="50"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_15020265653104" v="true" name="hospitalOperation" id="_1502027950744143">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:join-column name="HOSPITAL_OPERATION_ID" rc="HOSPITAL_OPERATION_ID" unique="false" nullable="false" insertable="true" updatable="false" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="processorRouteId" id="_150202656531549">
+                <jpa:jbdf/>
+                <jpa:jbnf/>
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PROCESSOR_ROUTE_ID" unique="false" nullable="false" insertable="true" updatable="true" table="T_PROCESSOR_ROUTE"/>
+                <jpa:generated-value strategy="SEQUENCE" generator="S_T_PROCESSOR_ROUTE"/>
+                <jpa:sequence-generator name="S_T_PROCESSOR_ROUTE" sequence-name="S_T_PROCESSOR_ROUTE" catalog="" schema="" initial-value="1" allocation-size="50"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:el/>
+        <jpa:table name="T_PROCESSOR_ROUTE"/>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:c>
+        <db u="jdbc:oracle:thin:@charity.sordy.net:43210:orcl" n="smartoperation" p="person" d="oracle.jdbc.OracleDriver"/>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_1502027552580135">
+            <i ref="_15020265653092" x="60" y="21">
+                <el/>
+            </i>
+            <i ref="_15020265653106" x="50" y="414">
+                <el/>
+            </i>
+            <i ref="_15020265653105" x="614" y="51">
+                <el/>
+            </i>
+            <i ref="_15020265653104" x="361" y="296">
+                <el/>
+            </i>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>

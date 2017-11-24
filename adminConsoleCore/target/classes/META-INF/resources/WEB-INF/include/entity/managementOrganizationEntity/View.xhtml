@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+    <p:dialog id="ManagementOrganizationViewDlg" widgetVar="ManagementOrganizationViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewManagementOrganizationTitle}" closeOnEscape="true">
+
+        <h:form id="ManagementOrganizationViewForm">
+
+            <h:panelGroup id="display">
+                <p:panelGrid columns="4" columnClasses="column" rendered="#{managementOrganizationController.selected != null}">
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgCode}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.managementOrganizationCode}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgCode}" readonly="true"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgName}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.managementOrganizationName}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgName}" required="true"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgShortname}"/>
+                    <h:outputText value="#{managementOrganizationController.selected.managementOrgShortname}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgShortname}" required="true"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgServerProt}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.serverProt}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgServerProt}" required="true"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgareaServerIp}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.serverIp}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgServerIp}" required="true"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgAnalogueCalculateFlag}"/>
+                    <p:selectOneMenu value="#{managementOrganizationController.selected.analogueCalculateFlag}" disabled="true"
+                                     style="width:125px" required="true" >
+                        <f:selectItem itemValue="1" itemLabel="是"/>
+                                <f:selectItem itemValue="0" itemLabel="否"/>
+                    </p:selectOneMenu>
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgConfirmCompensateFlag}"/>
+                    <p:selectOneMenu value="#{managementOrganizationController.selected.confirmCompensateFlag}" disabled="true"
+                                     style="width:125px" required="true" >
+                        <f:selectItem itemValue="1" itemLabel="是"/>
+                                <f:selectItem itemValue="0" itemLabel="否"/>
+                               </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgMaxHospitalTotal}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.maxHospitalTotal}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgMaxHospitalTotal}" required="true"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgCompensateOrder}"/>
+                    <h:outputText value="#{managementOrganizationController.selected.compensableOrder}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgCompensateOrder}" required="true"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgAreacode}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.areaCode}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgAreacode}" required="true"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgLinkman}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.linkman}" title="#{myBundle.ViewManagementOrganizationTitle_managementLinkman}"/>
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgTelephone}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.telephone}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrganizationTelephone}"/>
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgAddress}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.address}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgAddress}"/>
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgMobilephone}"/>
+                    <h:outputText value="#{managementOrganizationController.selected.mobilephone}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrganizationMobilephone}"/>
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgStandbyServerIp}"/>
+                    <h:outputText value="#{managementOrganizationController.selected.standbyServerIp}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgStandbyServerIp}"/>
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgStandbyServerProt}"/>
+                    <h:outputText value="#{managementOrganizationController.selected.standbyServerProt}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrganizationStandbyServerProt}" />
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgRemark}"/>
+                    <h:outputText value="#{managementOrganizationController.selected.remark}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgRemark}"/>
+
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgRecordCreator}"/>
+                    <h:outputText  value="#{managementOrganizationController.selected.recordCreator}" title="#{myBundle.ViewManagementOrganizationTitle_managementOrgRecordCreator}"/>
+                    <h:outputText value="#{myBundle.ViewManagementOrgText_managementOrgRecordCreateTime}"/>
+                    <h:outputText value="#{managementOrganizationController.selected.recordCreateTime}" title="#{myBundle.ViewManagementOrganizationTitle_createTime}">
+                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+                    </h:outputText>
+
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton value="#{myBundle.Close}" onclick="PF('ManagementOrganizationViewDialog').hide()" icon="ui-icon-close" styleClass="Fright"/>
+            </h:panelGroup>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>
+
+</html>

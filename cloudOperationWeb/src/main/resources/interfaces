@@ -1,0 +1,16 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+auto ${eth0}
+iface ${eth0} inet static
+address ${address}
+gateway ${gateway}
+netmask ${netmask}
+iface lo inet loopback
+auto ${eth1}
+iface ${eth1} inet static
+address ${address1}
+netmask ${netmask1}

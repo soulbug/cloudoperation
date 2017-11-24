@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+    <f:metadata>
+        <f:viewParam name="hospitalNumber" value="#{hisDataSourceController.hospitalNumber}" />
+    </f:metadata>
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card ShadowEffect  ">
+                <div class="Container100">
+                    <div class="ContainerIndent">
+                        <!-- 外部菜单 -->
+                        <h:form id="HospitalHisListForm">
+
+                                <div class="CardTopic Fs22">
+                                    <p:commandButton id="createHis"
+                                                     value="#{myBundle.createHis}"
+                                                     update=":HospitalHisListForm"
+                                                     style="align-content: center"
+                                                     oncomplete="PF('HospitalHisCreateDialog').show();"/>
+                                </div>
+                                <p:contextMenu id="HospitalHisDataTableContextMenu" for="datalist">
+                                    <!-- <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('HospitalInfoListForm:createButton').click();" icon="ui-icon-plus"/>-->
+                                    <p:menuitem value="#{myBundle.View}"
+                                                onclick="document.getElementById('HospitalHisListForm:viewButton').click();"
+                                                icon="ui-icon-search"/>
+                                    <p:menuitem value="#{myBundle.Edit}"
+                                                onclick="document.getElementById('HospitalHisListForm:editButton').click();"
+                                                icon="ui-icon-pencil"/>
+                                </p:contextMenu>
+                                <p:dataTable id="datalist"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} "
+                                             currentPageReportTemplate="共{totalRecords}记录"
+                                             sortOrder="DESCENDING"
+                                             value="#{hisDataSourceController.lazyModel}"
+                                             lazy="true"
+                                             var="item"
+                                             paginator="true"
+                                             rows="10"
+                                             rowsPerPageTemplate="5,10,15"
+                                             selectionMode="single"
+                                             selection="#{hisDataSourceController.selected}">
+
+                                    <!--<p:ajax event="rowUnselect" update="@form:viewButton,@form:editButton"/>
+                                    <p:ajax event="contextMenu" update="@form:viewButton @form:editButton"/>-->
+                                    <p:ajax event="rowSelect"
+                                            update="@form:viewButton,@form:editButton,@form:HospitalHisDataTableContextMenu"/>
+                                    <p:ajax event="rowUnselect"
+                                            update="@form:viewButton,@form:editButton,@form:HospitalHisDataTableContextMenu"/>
+                                    <p:ajax event="contextMenu"
+                                            update="@form:viewButton @form:editButton "/>
+                                    <p:ajax event="rowDblselect"
+                                            onsuccess="document.getElementById('HospitalHisListForm:viewButton').click();"/>
+                                    <p:column headerText="#{myBundle.ListHospitalOperationTitle_hospitalNumber}">
+                                        <h:outputText value="#{item.hospitalNumber}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{myBundle.usageType}">
+                                        <h:outputText value="#{item.usageType}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{myBundle.dataSourceName}">
+                                        <h:outputText value="#{item.dataSourceName}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{myBundle.dataSourceType}">
+                                        <h:outputText value="#{item.dataSourceType}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{myBundle.creatTime}">
+                                        <h:outputText value="#{item.creatTime}">
+                                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="#{myBundle.dataSourceSubType}">
+                                        <h:outputText value="#{item.dataSourceSubType}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{myBundle.useFlag}">
+                                        <h:outputText value="#{item.useFlag==1?'可用':'不可用'}"/>
+                                    </p:column>
+
+                                    <!-- <p:column headerText="创建人">
+                                         <h:outputText value="#{item.recordCreator}" />
+                                     </p:column>
+                                     <p:column headerText="创建时间">
+                                         <h:outputText value="#{item.recordCreateTime}" />
+                                     </p:column>-->
+                                </p:dataTable>
+                                <p:commandButton id="viewButton" style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}"
+                                                 update=":HospitalHisViewForm"
+                                                 oncomplete="PF('HospitalHisViewDialog').show()"/>
+                                <p:commandButton id="editButton" style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}"
+                                                 update=":HospitalHisEditForm"
+                                                 oncomplete="PF('HospitalHisEditDialog').show()"/>
+                                <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ui:composition>
+
+</html>

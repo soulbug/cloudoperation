@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HospitalOperationViewDlg" widgetVar="HospitalOperationViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewHospitalOperationTitle}" closeOnEscape="true">
+
+            <h:form id="HospitalOperationViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{hospitalOperationController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalOperationId}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.hospitalOperationId}" title="#{myBundle.ViewHospitalOperationTitle_hospitalOperationId}"/>
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalName}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.hospitalName}" title="#{myBundle.ViewHospitalOperationTitle_hospitalName}"/>
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalNumber}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.hospitalNumber}" title="#{myBundle.ViewHospitalOperationTitle_hospitalNumber}"/>
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalGrade}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.hospitalGrade}" title="#{myBundle.ViewHospitalOperationTitle_hospitalGrade}"/>
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_areaCode}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.areaCode}" title="#{myBundle.ViewHospitalOperationTitle_areaCode}"/>
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_hospitalKey}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.hospitalKey}" title="#{myBundle.ViewHospitalOperationTitle_hospitalKey}"/>
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_processorMac}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.processorMac}" title="#{myBundle.ViewHospitalOperationTitle_processorMac}"/>
+
+                        <h:outputText value="#{myBundle.catagory}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.category==1?'接口平台前置机':'普通前置机'}" title="#{myBundle.ViewHospitalOperationTitle_status}"/>
+
+                        <h:outputText value="#{myBundle.vpnIP}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.vpnIP}" title="#{myBundle.ViewHospitalOperationTitle_status}"/>
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_createTime}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.createTime}" title="#{myBundle.ViewHospitalOperationTitle_createTime}">
+                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewHospitalOperationLabel_remark}"/>
+                        <h:outputText value="#{hospitalOperationController.selected.remark}" title="#{myBundle.ViewHospitalOperationTitle_remark}"/>
+                    </p:panelGrid>
+                    <p:separator/>  
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('HospitalOperationViewDialog').hide()" icon="ui-icon-close" styleClass="Fright"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

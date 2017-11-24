@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+    <p:dialog id="ManagementOrganizationCreateDlg" widgetVar="ManagementOrganizationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateManagementOrganizationTitle}" closeOnEscape="true">
+
+        <h:form id="ManagementOrganizationCreateForm">
+
+            <h:panelGroup id="display" rendered="#{managementOrganizationController.selected != null}">
+                <p:panelGrid columns="4" columnClasses="column">
+
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_organizationCode}" for="managementOrganizationCode" />
+                    <p:inputText maxlength="12" id="managementOrganizationCode" value="#{managementOrganizationController.selected.managementOrganizationCode}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationCode}" required="true"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_organizationName}" for="managementOrganizationName" />
+                    <p:inputText maxlength="120" id="managementOrganizationName" value="#{managementOrganizationController.selected.managementOrganizationName}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationName}" required="true"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_organizationShortname}" for="managementOrgShortname" />
+                    <p:inputText maxlength="120" id="managementOrgShortname" value="#{managementOrganizationController.selected.managementOrgShortname}" title="#{myBundle.CreateManagementOrganizationTitle_organizationShortname}" required="true"/>
+
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_orgServerProt}" for="managementOrganizationServerProt" />
+                    <p:inputText maxlength="6" id="managementOrganizationServerProt" value="#{managementOrganizationController.selected.serverProt}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationServerProt}" required="true"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_orgServerIp}" for="managementOrganizationServerIp" />
+                    <p:inputText maxlength="39" id="managementOrganizationServerIp" value="#{managementOrganizationController.selected.serverIp}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationServerIp}" required="true"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_AnalogueCalculateFlag}" for="managementOrgAnalogueCalculateFlag" />
+                    <p:selectOneMenu id="managementOrgAnalogueCalculateFlag"
+                                     value="#{managementOrganizationController.selected.analogueCalculateFlag}"
+                                     style="width:125px" required="true" >
+                                        <f:selectItem itemValue="1" itemLabel="是"/>
+                                <f:selectItem itemValue="0" itemLabel="否"/>
+                                
+                               </p:selectOneMenu>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_ConfirmCompensateFlag}" for="managementOrgConfirmCompensateFlag" />
+                    <p:selectOneMenu id="managementOrgConfirmCompensateFlag"
+                                     value="#{managementOrganizationController.selected.confirmCompensateFlag}"
+                                     style="width:125px" required="true" >
+                                        <f:selectItem itemValue="1" itemLabel="是"/>
+                                <f:selectItem itemValue="0" itemLabel="否"/>
+                               </p:selectOneMenu>
+                    <!--<p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_orgConfirmCompensateFlag}" for="managementOrganizationConfirmCompensateFlag" />-->
+                    <!--<p:inputText id="managementOrganizationConfirmCompensateFlag" value="#{managementOrganizationController.selected.confirmCompensateFlag}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationCode}" required="true"/>-->
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_orgMaxHospitalTotal}" for="managementOrganizationMaxHospitalTotal" />
+                    <p:inputText maxlength="6" id="managementOrganizationMaxHospitalTotal" value="#{managementOrganizationController.selected.maxHospitalTotal}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationMaxHospitalTotal}"  required="true">
+                        <!--<f:validateRegex pattern="^\+?[0-9][0-9]*$" />-->
+                    </p:inputText>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_orgCompensateOrder}" for="managementOrgCompensateOrder" />
+                    <p:inputText maxlength="6" id="managementOrgCompensateOrder" value="#{managementOrganizationController.selected.compensableOrder}" title="#{myBundle.CreateManagementOrganizationTitle_organizationCompensateOrder}" required="true"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_orgAreacode}" for="managementOrganizationAreacode" />
+                    <p:inputText maxlength="6" id="managementOrganizationAreacode" value="#{managementOrganizationController.selected.areaCode}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationAreacode}" required="true"/>
+
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_managementLinkman}" for="managementLinkman" />
+                    <p:inputText maxlength="40" id="managementLinkman" value="#{managementOrganizationController.selected.linkman}" title="#{myBundle.CreateManagementOrganizationTitle_managementLinkman}"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_orgTelephone}" for="managementOrganizationTelephone" />
+                    <p:inputText maxlength="30" id="managementOrganizationTelephone" value="#{managementOrganizationController.selected.telephone}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationTelephone}"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_managementOrgAddress}" for="managementOrgAddress" />
+                    <p:inputText maxlength="50" id="managementOrgAddress" value="#{managementOrganizationController.selected.address}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrgAddress}"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_managementOrganizationMobilephone}" for="managementOrganizationMobilephone" />
+                    <p:inputText maxlength="30" id="managementOrganizationMobilephone" value="#{managementOrganizationController.selected.mobilephone}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationMobilephone}"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_managementOrgStandbyServerIp}" for="managementOrgStandbyServerIp" />
+                    <p:inputText maxlength="39" id="managementOrgStandbyServerIp" value="#{managementOrganizationController.selected.standbyServerIp}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrgStandbyServerIp}"/>
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_managementOrganizationStandbyServerProt}" for="managementOrganizationStandbyServerProt" />
+                    <p:inputText maxlength="6" id="managementOrganizationStandbyServerProt" value="#{managementOrganizationController.selected.standbyServerProt}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrganizationStandbyServerProt}" />
+                    <p:outputLabel value="#{myBundle.CreateManagementOrganizationLabel_managementOrgRemark}" for="managementOrgRemark" />
+                    <p:inputText maxlength="400" id="managementOrgRemark" value="#{managementOrganizationController.selected.remark}" title="#{myBundle.CreateManagementOrganizationTitle_managementOrgRemark}"/>
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton  icon="ui-icon-check" styleClass="Fright" actionListener="#{managementOrganizationController.saveNew}" value="#{myBundle.Save}" update="display,:ManagementOrganizationListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ManagementOrganizationCreateDialog'));">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
+
+                <p:commandButton icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}" oncomplete="PF('ManagementOrganizationCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+            </h:panelGroup>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>
+
+</html>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.gsafer.cloudDev:security:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gsafer/cloudDev/security/1.0-SNAPSHOT/security-1.0-20171027.075143-28.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gsafer/cloudDev/security/1.0-SNAPSHOT/security-1.0-20171027.075143-28-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gsafer/cloudDev/security/1.0-SNAPSHOT/security-1.0-20171027.075143-28-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

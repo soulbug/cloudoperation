@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+    <p:dialog id="HospitalHisCreateDlg" widgetVar="HospitalHisCreateDialog" modal="true" resizable="false"
+              appendTo="@(body)"
+              header="创建医院his配置" closeOnEscape="true">
+
+        <h:form id="HospitalHisCreateForm">
+
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" columnClasses="column">
+
+                    <!--<h:outputText value="医院编码"/>
+                    <p:inputText value="#{hisDataSourceController.hisDataSourceAdd.hospitalNumber}"/>
+-->
+                    <h:outputText value="#{myBundle.dataSourceName}"/>
+                    <p:inputText value="#{hisDataSourceController.hisDataSourceAdd.dataSourceName}"/>
+
+                    <h:outputText value="#{myBundle.usageType}"/>
+                    <p:selectOneMenu id="usageType"
+                                     value="#{hisDataSourceController.hisDataSourceAdd.usageType}"
+                                     style="width:125px" required="true">
+                        <f:selectItem itemValue="1201" itemLabel="查询申报信息"/>
+                        <f:selectItem itemValue="1204" itemLabel="电子病历提取"/>
+                        <f:selectItem itemValue="1212" itemLabel="辅助检查提取"/>
+                        <f:selectItem itemValue="1213" itemLabel="影像资料提取"/>
+                        <f:selectItem itemValue="1301" itemLabel="查询处方信息"/>
+                        <f:selectItem itemValue="1401" itemLabel="查询结算信息"/>
+                        <f:selectItem itemValue="1411" itemLabel="理赔金回写"/>
+                        <f:selectItem itemValue="1605" itemLabel="查询医疗目录"/>
+                    </p:selectOneMenu>
+                    <h:outputText value="#{myBundle.dataSourceType}"/>
+                    <p:selectOneMenu id="dataSourceType"
+                                     value="#{hisDataSourceController.hisDataSourceAdd.dataSourceType}"
+                                     style="width:125px" required="true">
+                         <f:selectItem itemValue="chinese" itemLabel="中文视图"/>
+                         <f:selectItem itemValue="english" itemLabel="英文视图"/>
+                         <f:selectItem itemValue="webservice" itemLabel="webservice"/>
+                    </p:selectOneMenu>
+                    <h:outputText value="#{myBundle.dataSourceSubType}"/>
+                    <p:selectOneMenu id="dataSourceSubType"
+                                     value="#{hisDataSourceController.hisDataSourceAdd.dataSourceSubType}"
+                                     style="width:125px" required="true">
+                        <f:selectItem itemValue="mysql" itemLabel="mysql"/>
+                        <f:selectItem itemValue="oracle" itemLabel="oracle"/>
+                        <f:selectItem itemValue="sqlserver" itemLabel="sqlserver"/>
+                        <f:selectItem itemValue="db2" itemLabel="db2"/>
+                        <f:selectItem itemValue="cache" itemLabel="cache"/>
+                        <f:selectItem itemValue="infomix" itemLabel="infomix"/>
+                        <f:selectItem itemValue="sysbase2" itemLabel="sysbase2"/>
+                        <f:selectItem itemValue="sysbase3" itemLabel="sysbase3"/>
+                        <f:selectItem itemValue="commonDriver" itemLabel="commonDriver"/>
+                    </p:selectOneMenu>
+                    <h:outputText value="#{myBundle.userName}"/>
+                    <p:inputText value="#{hisDataSourceController.hisDataSourceAdd.userName}">
+                    </p:inputText>
+
+                    <h:outputText value="#{myBundle.passWord}"/>
+                    <p:inputText value="#{hisDataSourceController.hisDataSourceAdd.passWord}">
+                    </p:inputText>
+
+                    <h:outputText value="#{myBundle.connUrl}"/>
+                    <p:inputText value="#{hisDataSourceController.hisDataSourceAdd.connUrl}">
+                    </p:inputText>
+
+                    <h:outputText value="#{myBundle.useFlag}"/>
+                    <p:selectOneMenu id="useFlag"
+                                     value="#{hisDataSourceController.hisDataSourceAdd.useFlag}"
+                                     style="width:125px" required="true">
+                         <f:selectItem itemValue="1" itemLabel="启用"/>
+                         <f:selectItem itemValue="0" itemLabel="禁用"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="#{myBundle.createEmployee}"/>
+                    <p:inputText value="#{hisDataSourceController.hisDataSourceAdd.createEmployee}">
+                        <f:converter  converterId="javax.faces.Character"/>
+                    </p:inputText>
+
+                    <h:outputText value="#{myBundle.exeSql}"/>
+                    <p:inputText value="#{hisDataSourceController.hisDataSourceAdd.exeSql}">
+                    </p:inputText>
+
+                    <h:outputText value="#{myBundle.creatTime}"/>
+                    <p:calendar id="createTime" pattern="yyyy-MM-dd HH:mm:ss"
+                                value="#{hisDataSourceController.hisDataSourceAdd.creatTime}" required="true"
+                                showOn="button"/>
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton icon="ui-icon-check" styleClass="Fright"
+                                 actionListener="#{hisDataSourceController.add()}" value="#{myBundle.Save}"
+                                 update="display,:HospitalHisListForm:datalist,:HospitalHisCreateForm,:HospitalHisListForm:HospitalHisDataTableContextMenu,:growl"
+                                 oncomplete="handleSubmit(xhr,status,args,PF('HospitalHisCreateDialog'));">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}"
+                               icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}"
+                                 oncomplete="PF('HospitalHisCreateDialog').hide()" update="display" process="@this"
+                                 immediate="true" resetValues="true"/>
+
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+</ui:composition>
+
+</html>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+
+    <p:dialog id="HospitalOperationCreateDlg" widgetVar="HospitalOperationCreateDialog" modal="true" resizable="false"
+              appendTo="@(body)" header="#{myBundle.CreateHospitalOperationTitle}" closeOnEscape="true">
+
+        <h:form id="HospitalOperationCreateForm">
+
+            <h:panelGroup id="display" rendered="#{hospitalOperationController.selected != null}">
+                <p:panelGrid columns="2" columnClasses="column">
+
+                    <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_hospitalName}" for="hospitalName"/>
+                    <p:inputText id="hospitalName" value="#{hospitalOperationController.selected.hospitalName}"
+                                 title="#{myBundle.CreateHospitalOperationTitle_hospitalName}" required="true"/>
+
+                    <!-- <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_hospitalNumber}" for="hospitalNumber" />
+                     <p:inputText id="hospitalNumber" value="#{hospitalOperationController.selected.hospitalNumber}" title="#{myBundle.CreateHospitalOperationTitle_hospitalNumber}"/>
+-->
+                    <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_hospitalGrade}" for="hospitalGrade"/>
+                    <p:selectOneMenu id="hospitalGrade"
+                                     value="#{hospitalOperationController.selected.hospitalGrade}"
+                                     style="width:125px" required="true">
+                                <f:selectItem itemValue="" itemLabel="医院等级"/>
+                                <f:selectItem itemValue="三级甲等" itemLabel="三级甲等"/>
+                                <f:selectItem itemValue="三级乙等" itemLabel="三级乙等"/>
+                                <f:selectItem itemValue="三级丙等" itemLabel="三级丙等"/>
+                                <f:selectItem itemValue="二级甲等" itemLabel="二级甲等"/>
+                                <f:selectItem itemValue="二级乙等" itemLabel="二级乙等"/>
+                                <f:selectItem itemValue="二级丙等" itemLabel="二级丙等"/>
+                                <f:selectItem itemValue="一级甲等" itemLabel="一级甲等"/>
+                                <f:selectItem itemValue="一级乙等" itemLabel="一级乙等"/>
+                                <f:selectItem itemValue="一级丙等" itemLabel="一级丙等"/>
+                               </p:selectOneMenu>
+                    <!--<p:inputText id="hospitalGrade" value="#{hospitalOperationController.selected.hospitalGrade}" title="#{myBundle.CreateHospitalOperationTitle_hospitalGrade}"/>-->
+
+                    <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_areaCode}" for="areaCode"/>
+                    <h:panelGroup>
+                        <p:selectOneMenu id="province"
+                                         value="#{hospitalOperationController.province}" style="width:100px"
+                                         required="true">
+                            <f:selectItem itemValue="" itemLabel="请选择省"/>
+                            <f:selectItems value="#{hospitalOperationController.provinceList}" var="provinces"
+                                           itemLabel="#{provinces.name}" itemValue="#{provinces.id}"/>
+                            <!--<p:ajax listener="#{hospitalOperationController.changeListForCity}"/>-->
+                            <!-- <p:ajax event="blur" reRender="city" immediate="true"/>-->
+                            <p:ajax update="city" listener="#{hospitalOperationController.changeListForCity}"/>
+                        </p:selectOneMenu>
+                        <p:selectOneMenu id="city" value="#{hospitalOperationController.city}"
+                                         style="width:100px" required="true">
+                            <f:selectItem itemValue="" itemLabel="请选择市"/>
+                            <f:selectItems value="#{hospitalOperationController.cityList}" var="cities"
+                                           itemLabel="#{cities.name} " itemValue="#{cities.id}"/>
+                            <!--<p:ajax event="onchange" reRender="city" immediate="true"/>-->
+                            <p:ajax update="areaCode" listener="#{hospitalOperationController.changeListForArea}"/>
+                        </p:selectOneMenu>
+                        <p:selectOneMenu id="areaCode" value="#{hospitalOperationController.selected.areaCode}"
+                                         style="width:100px" required="true">
+                            <f:selectItem itemValue="" itemLabel="请选择区"/>
+                            <f:selectItems value="#{hospitalOperationController.areaList}" var="area"
+                                           itemLabel="#{area.name} " itemValue="#{area.code}"/>
+                            <!-- <p:ajax  listener="#{hospitalOperationController.getCode(this)}" />-->
+                        </p:selectOneMenu>
+                    </h:panelGroup>
+                    <!-- <p:inputText id="areaCode" value="#{hospitalOperationController.selected.areaCode}" title="#{myBundle.CreateHospitalOperationTitle_areaCode}"/>-->
+
+                    <!-- <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_hospitalKey}" for="hospitalKey" />
+                     <p:inputText id="hospitalKey" value="#{hospitalOperationController.selected.hospitalKey}" title="#{myBundle.CreateHospitalOperationTitle_hospitalKey}"/>-->
+
+                    <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_processorMac}" for="processorMac"/>
+                    <p:selectOneMenu id="processorMac"
+                                     value="#{hospitalOperationController.selected.processorMac}"
+                                     style="width:125px" required="true">
+                                <f:selectItem itemValue="" itemLabel="请选择mac地址"/>
+                                <f:selectItems value="#{hospitalOperationController.fileNames}" var="fileName"
+                                               itemLabel="#{fileName}" itemValue="#{fileName}"/>
+                               </p:selectOneMenu>
+                    <p:outputLabel value="#{myBundle.catagory}" for="catagory"/>
+                    <p:selectOneMenu id="catagory"
+                                     value="#{hospitalOperationController.selected.category}"
+                                     style="width:125px" required="true">
+                         <!--       <f:selectItem itemValue="" itemLabel="请选择前置机类别"/>-->
+                         <!--      <f:selectItem itemValue="1" itemLabel="接口前置机"/> -->
+                        <f:selectItem itemValue="1" itemLabel="普通前置机"/>
+                               </p:selectOneMenu>
+                    <!--<p:inputText id="processorMac" value="#{hospitalOperationController.selected.processorMac}" title="#{myBundle.CreateHospitalOperationTitle_processorMac}"/>-->
+
+                    <!--  <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_status}" for="status" />
+                      <p:inputText id="status" value="#{hospitalOperationController.selected.status}" title="#{myBundle.CreateHospitalOperationTitle_status}"/>-->
+
+                    <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_createTime}" for="createTime"/>
+                    <p:calendar id="createTime" pattern="yyyy-MM-dd HH:mm:ss"
+                                value="#{hospitalOperationController.selected.createTime}"
+                                title="#{myBundle.CreateHospitalOperationTitle_createTime}" required="true"
+                                showOn="button"/>
+                  <!--  <p:outputLabel value="#{myBundle.vpnIP}" for="vpnIP"/>
+                    <p:inputText id="vpnIP" value="#{hospitalOperationController.selected.vpnIP}"
+                                 title="#{myBundle.CreateHospitalOperationTitle_createTime}" required="true"
+                                 showOn="button"/>-->
+
+                    <p:outputLabel value="#{myBundle.CreateHospitalOperationLabel_remark}" for="remark"/>
+                    <p:inputText id="remark" value="#{hospitalOperationController.selected.remark}"
+                                 title="#{myBundle.CreateHospitalOperationTitle_remark}"/>
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton icon="ui-icon-check" styleClass="Fright"
+                                 actionListener="#{hospitalOperationController.saveNew}" value="#{myBundle.Save}"
+                                 update="display,:HospitalOperationListForm:datalist,:growl"
+                                 oncomplete="handleSubmit(xhr,status,args,PF('HospitalOperationCreateDialog'));">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}"
+                               icon="ui-icon-alert"/>
+                </p:commandButton>
+
+                <p:commandButton icon="ui-icon-close" styleClass="Fright" value="#{myBundle.Cancel}"
+                                 oncomplete="PF('HospitalOperationCreateDialog').hide()" update="display"
+                                 process="@this" immediate="true" resetValues="true"/>
+            </h:panelGroup>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>
+
+</html>

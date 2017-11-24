@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+    <p:dialog id="HospitalHisViewDlg" widgetVar="HospitalHisViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="医院单个配置信息" closeOnEscape="true">
+
+        <h:form id="HospitalHisViewForm">
+
+            <h:panelGroup id="display">
+                <p:panelGrid columns="4" columnClasses="column" rendered="#{hisDataSourceController.selected != null}">
+
+                    <h:outputText value="#{myBundle.ListHospitalOperationTitle_hospitalNumber}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.hospitalNumber}" />
+
+                    <h:outputText value="#{myBundle.dataSourceName}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.dataSourceName}"/>
+
+                    <h:outputText value="#{myBundle.usageType}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.usageType}"/>
+
+                    <h:outputText value="#{myBundle.dataSourceType}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.dataSourceType}" />
+
+                    <h:outputText value="#{myBundle.dataSourceSubType}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.dataSourceSubType}" />
+
+                    <h:outputText value="#{myBundle.userName}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.userName}" />
+
+                    <h:outputText value="#{myBundle.passWord}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.passWord}" />
+
+                    <h:outputText value="#{myBundle.connUrl}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.connUrl}" />
+
+                    <h:outputText value="#{myBundle.useFlag}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.useFlag}" />
+
+                    <h:outputText value="#{myBundle.createEmployee}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.createEmployee}" />
+
+                    <h:outputText value="#{myBundle.exeSql}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.exeSql}" />
+                    
+                    <h:outputText value="#{myBundle.creatTime}"/>
+                    <h:outputText value="#{hisDataSourceController.selected.creatTime}" >
+                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+                    </h:outputText>
+
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton value="#{myBundle.Close}" onclick="PF('HospitalHisViewDialog').hide()" icon="ui-icon-close" styleClass="Fright"/>
+            </h:panelGroup>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>
+
+</html>

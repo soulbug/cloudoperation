@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.jckj.cis:Platform-interface:cis-platform-CIS_PlatformCode_R2_2_00_10_1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jckj/cis/Platform-interface/cis-platform-CIS_PlatformCode_R2_2_00_10_1-SNAPSHOT/Platform-interface-cis-platform-CIS_PlatformCode_R2_2_00_10_1-20170313.030907-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jckj/cis/Platform-interface/cis-platform-CIS_PlatformCode_R2_2_00_10_1-SNAPSHOT/Platform-interface-cis-platform-CIS_PlatformCode_R2_2_00_10_1-20170313.030907-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jckj/cis/Platform-interface/cis-platform-CIS_PlatformCode_R2_2_00_10_1-SNAPSHOT/Platform-interface-cis-platform-CIS_PlatformCode_R2_2_00_10_1-20170313.030907-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

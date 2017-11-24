@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions">
+    <!--<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+    <h:outputScript library="js" name="data.js"></h:outputScript>
+    <h:outputScript library="js" name="selector.js"></h:outputScript>-->
+    <div class="Container100">
+        <div class="ContainerIndent">
+            <div class="Card ShadowEffect  ">
+                <div class="Container100">
+                    <div class="ContainerIndent">
+
+                        <!-- 外部菜单 -->
+
+                        <h:form id="HospitalInfoListForm">
+
+                            <!-- 导出菜单 -->
+                            <h2 class="CardTopic">
+                                <i class="icon-google132 Fs20 Fleft MarRight10 OvHidden"/>#{myBundle.hospitalTitle}
+                                <p:commandButton id="menuButton" type="button"
+                                                 icon="fa fa-ellipsis-v Gray Fs20"
+                                                 styleClass="Fright GrayButton"
+                                                 style="margin-top:-10px !important;"/>
+                                <p:menu overlay="true" trigger="menuButton"
+                                        my="left top" at="left bottom">
+
+                                    <p:menuitem value="导出Excel"
+                                                icon="ui-icon-disk fa fa-file-excel-o"
+                                                ajax="false">
+                                        <p:dataExporter type="xlsx"
+                                                        target="datalist"
+                                                        fileName="details"/>
+                                    </p:menuitem>
+                                    <p:menuitem value="批量打印"
+                                                icon="ui-icon-disk fa fa-file-pdf-o"
+                                                ajax="false">
+                                        <pe:exporter type="xlsx"
+                                                     target="datalist"
+                                                     fileName="details"
+                                                     facetBackground="#AAFFBB"
+                                                     datasetPadding="4"/>
+                                    </p:menuitem>
+                                </p:menu>
+                                <p:commandButton id="advancedSearch" type="button"
+                                                 icon="fa fa-filter Gray Fs20"
+                                                 styleClass="Fright GrayButton"
+                                                 style="margin-top:-10px !important;"
+                                                 onclick="PF('dynaFormGroup').toggle();"/>
+                                <!-- <p:commandButton id="createButton1"
+                                                  icon="ui-icon-plus Gray Fs20"
+                                                  styleClass="Fright GrayButton"
+                                                  style="margin-top:-10px !important;"
+                                                  actionListener="#{hospitalInfoController.prepareCreate}"
+                                                  update=":HospitalInfoCreateForm"
+                                                  oncomplete="PF('HospitalInfoCreateDialog').show()"/>-->
+                            </h2>
+
+                            <!--TODO: 使用导航  -->
+                            <p:contextMenu id="HospitalInfoDataTableContextMenu" for="datalist">
+                                <!-- <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('HospitalInfoListForm:createButton').click();" icon="ui-icon-plus"/>-->
+                                <p:menuitem value="#{myBundle.View}"
+                                            onclick="document.getElementById('HospitalInfoListForm:viewButton').click();"
+                                            icon="ui-icon-search"/>
+                                <p:menuitem value="#{myBundle.Edit}"
+                                            onclick="document.getElementById('HospitalInfoListForm:editButton').click();"
+                                            icon="ui-icon-pencil"/>
+                                <p:menuitem value="#{myBundle.Delete}"
+                                            onclick="document.getElementById('HospitalInfoListForm:deleteButton').click();"
+                                            icon="ui-icon-trash"/>
+                            </p:contextMenu>
+                            <p:dataTable id="datalist"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} "
+                                         currentPageReportTemplate="共{totalRecords}记录"
+                                         sortOrder="DESCENDING"
+                                         value="#{hospitalInfoController.dataModel}"
+                                         lazy="true"
+                                         var="item"
+                                         paginator="true"
+                                         rows="5"
+                                         rowsPerPageTemplate="5,10,15"
+                                         selectionMode="single"
+                                         selection="#{hospitalInfoController.selected}"
+                                         filteredValue="#{hospitalInfoController.filteredItems}">
+                                <!--
+                                         To disable Lazy Loading, please copy/replace the following lines above,
+                                         and be sure to replace the word HASH with the # symbol:
+
+                                         value="HASH{hospitalInfoController.items}"
+                                         lazy="false"
+                                         rowKey="HASH{item.hospitalOperationId}"
+                                -->
+
+
+                                <!-- <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:HospitalInfoDataTableContextMenu"/>
+                                 <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:HospitalInfoDataTableContextMenu"/>
+                                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('HospitalInfoListForm:viewButton').click();"/>-->
+                                <p:ajax event="rowSelect"
+                                        update="@form:viewButton,@form:editButton,@form:deleteButton,@form:HospitalInfoDataTableContextMenu"/>
+                                <p:ajax event="rowUnselect"
+                                        update="@form:viewButton,@form:editButton,@form:deleteButton,@form:HospitalInfoDataTableContextMenu"/>
+                                <p:ajax event="contextMenu"
+                                        update="@form:viewButton @form:editButton @form:deleteButton"/>
+                                <p:ajax event="rowDblselect"
+                                        onsuccess="document.getElementById('HospitalInfoListForm:viewButton').click();"/>
+                                
+                                <p:column headerText="#{myBundle.ListHospitalOperationTitle_hospitalNumber}" sortBy="#{item.hospitalNumber}"
+                                          filterBy="#{item.hospitalNumber}" visible="true">
+                                    <h:outputText value="#{item.hospitalNumber}"/>
+                                </p:column>
+                                <p:column headerText="#{myBundle.ListHospitalOperationTitle_hospitalName}" sortBy="#{item.hospitalName}"
+                                          filterBy="#{item.hospitalName}" visible="true">
+                                    <h:outputText value="#{item.hospitalName}"/>
+                                </p:column>
+
+                                <p:column headerText="#{myBundle.ListHospitalOperationTitle_hospitalGrade}" sortBy="#{item.hospitalGrade}"
+                                          filterBy="#{item.hospitalGrade}" visible="true">
+                                    <h:outputText value="#{item.hospitalGrade}"/>
+                                </p:column>
+                                <!-- <p:column headerText="医院地址 ">
+                                     <h:outputText value="#{item.address}" />
+                                 </p:column>-->
+                                <p:column headerText="#{myBundle.ListHospitalOperationTitle_areaCode}" sortBy="#{item.areaCode}" filterBy="#{item.areaCode}"
+                                          visible="true">
+                                    <h:outputText value="#{item.areaCode}"/>
+                                </p:column>
+                                <p:column headerText="His">
+                                    <h:outputLink   value="../hisDataSource/index.xhtml">
+                                        <p:button  value="#{myBundle.checkHisButton}"/>
+                                        <f:param name="hospitalNumber"
+                                                 value="#{item.hospitalNumber}"/>
+                                    </h:outputLink>
+                                </p:column>
+                                <!-- <p:column headerText="创建人">
+                                     <h:outputText value="#{item.recordCreator}" />
+                                 </p:column>
+                                 <p:column headerText="创建时间">
+                                     <h:outputText value="#{item.recordCreateTime}" />
+                                 </p:column>-->
+
+                            </p:dataTable>
+
+                            <!-- <p:commandButton id="createButton" style="visibility: hidden;" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{hospitalInfoController.prepareCreate}" update=":HospitalInfoCreateForm" oncomplete="PF('HospitalInfoCreateDialog').show()"/>-->
+                            <p:commandButton id="viewButton" style="visibility: hidden;" icon="ui-icon-search"
+                                             value="#{myBundle.View}" update=":HospitalInfoViewForm"
+                                             oncomplete="PF('HospitalInfoViewDialog').show()"
+                                             actionListener="#{hospitalInfoController.selectByHospitalNumber()}"/>
+                            <p:commandButton id="editButton" style="visibility: hidden;" icon="ui-icon-pencil"
+                                             value="#{myBundle.Edit}" update=":HospitalInfoEditForm"
+                                             oncomplete="PF('HospitalInfoEditDialog').show()"
+                                             actionListener="#{hospitalInfoController.selectByHospitalNumber()}"/>
+                            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"
+                                             value="#{myBundle.Delete}"
+                                             actionListener="#{hospitalInfoController.delete}" update=":growl,datalist">
+                                <p:confirm header="#{myBundle.ConfirmationHeader}"
+                                           message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                            </p:commandButton>
+
+                            <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h:outputScript>
+        function outCome() {
+            location.href = "../hisDataSource/index.xhtml"
+        }
+
+    </h:outputScript>
+</ui:composition>

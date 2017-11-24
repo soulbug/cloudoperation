@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/adminConsoleCore/adminConsoleCore.iml" filepath="$PROJECT_DIR$/adminConsoleCore/adminConsoleCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloudOperation.iml" filepath="$PROJECT_DIR$/cloudOperation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloudOperationCore/cloudOperationCore.iml" filepath="$PROJECT_DIR$/cloudOperationCore/cloudOperationCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloudOperationWeb/cloudOperationWeb.iml" filepath="$PROJECT_DIR$/cloudOperationWeb/cloudOperationWeb.iml" />
+    </modules>
+  </component>
+</project>
